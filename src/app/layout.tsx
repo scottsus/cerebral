@@ -5,6 +5,7 @@ import { Navbar } from "~/components/navbar";
 import { type Metadata } from "next";
 import { Toaster } from "sonner";
 import { Outfit } from "next/font/google";
+import { ThemeProvider } from "~/components/theme-provider";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -21,9 +22,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={outfit.className}>
         <Toaster position="top-center" />
-        <body className="flex max-h-screen w-full flex-col items-center bg-[#2F2F2F]">
-          <Navbar />
-          {children}
+        <body className="flex max-h-screen w-full flex-col items-center bg-white dark:bg-[#1a1a1a] transition-colors">
+          <ThemeProvider>
+            <Navbar />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

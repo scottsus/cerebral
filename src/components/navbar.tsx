@@ -1,5 +1,8 @@
+"use client";
+
 import { DatabaseIcon } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export function Navbar() {
   return (
@@ -8,15 +11,18 @@ export function Navbar() {
         href="/"
         className="text-2xl font-bold text-[#f6f930] md:text-3xl lg:text-4xl"
       >
-        Ind<span className="text-[#ffffff]">order</span>.
+        Ind<span className="text-[#ffffff] dark:text-gray-200">order</span>.
       </Link>
 
-      <Link
-        href="/dashboard"
-        className="text-sm font-semibold text-[#f6f930] md:text-xl lg:text-xl hover:brightness-125 transition-all"
-      >
-        <DatabaseIcon size={40} />
-      </Link>
+      <div className="flex items-center gap-4">
+        <ThemeToggle />
+        <Link
+          href="/dashboard"
+          className="text-sm font-semibold text-[#f6f930] md:text-xl lg:text-xl hover:brightness-125 transition-all"
+        >
+          <DatabaseIcon size={40} />
+        </Link>
+      </div>
     </div>
   );
 }
