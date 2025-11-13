@@ -43,6 +43,7 @@ export const users = pgTable(
   },
   (table) => ({
     idIdx: index("user_id_idx").on(table.id),
+    emailIdx: index("user_email_idx").on(table.email),
   }),
 );
 
@@ -79,6 +80,10 @@ export const receipts = pgTable(
     ),
   },
   (table) => ({
-    idIdx: index("receipt_buyer_idx").on(table.buyer),
+    buyerIdx: index("receipt_buyer_idx").on(table.buyer),
+    userIdIdx: index("receipt_user_id_idx").on(table.userId),
+    statusIdx: index("receipt_status_idx").on(table.status),
+    purchaseDateIdx: index("receipt_purchase_date_idx").on(table.purchaseDate),
+    createdAtIdx: index("receipt_created_at_idx").on(table.createdAt),
   }),
 );
