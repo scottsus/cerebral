@@ -82,3 +82,38 @@ export const receipts = pgTable(
     idIdx: index("receipt_buyer_idx").on(table.buyer),
   }),
 );
+
+export const notificationTypeEnum = pgEnum("notification_type", [
+  "NEW_ORDER",
+  "ORDER_COMPLETED",
+  "ORDER_CANCELLED",
+  "ORDER_FLAGGED",
+  "SYSTEM",
+]);
+
+export const notifications = pgTable(
+  "notifications",
+  {
+    id: serial("id")
+      .primaryKey()
+      .notNull(),
+    userId: uuid("user_id")
+      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+      .notNull(),
+    type: notificationTypeEnum("type").notNull(),
+    title: varchar("title", { length: 256 }).notNull(),
+    message: text("message"),
+    receiptId: serial("receipt_id").references(() => receipts.id, {
+      onDelete: "set null",
+      onUpdate: "cascade",
+    }),
+    isRead: sql`boolean`.default(sql`false`).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (table) => ({
+    userIdIdx: index("notification_user_id_idx").on(table.userId),
+    isReadIdx: index("notification_is_read_idx").on(table.isRead),
+  }),
+);
