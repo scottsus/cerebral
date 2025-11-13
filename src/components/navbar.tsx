@@ -1,4 +1,4 @@
-import { DatabaseIcon } from "lucide-react";
+import { DatabaseIcon, Users } from "lucide-react";
 import Link from "next/link";
 
 export function Navbar() {
@@ -11,12 +11,20 @@ export function Navbar() {
         Ind<span className="text-[#ffffff]">order</span>.
       </Link>
 
-      <Link
-        href="/dashboard"
-        className="text-sm font-semibold text-[#f6f930] md:text-xl lg:text-xl hover:brightness-125 transition-all"
-      >
-        <DatabaseIcon size={40} />
-      </Link>
+      <div className="flex items-center gap-4">
+        <Link
+          href="/customers"
+          className="text-sm font-semibold text-[#f6f930] md:text-xl lg:text-xl hover:brightness-125 transition-all"
+        >
+          <Users size={40} />
+        </Link>
+        <Link
+          href="/dashboard"
+          className="text-sm font-semibold text-[#f6f930] md:text-xl lg:text-xl hover:brightness-125 transition-all"
+        >
+          <DatabaseIcon size={40} />
+        </Link>
+      </div>
     </div>
   );
 }
